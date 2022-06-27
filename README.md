@@ -5,6 +5,7 @@ This is a dev days project. It's goals are to:
 [ ] incorporate marshmallow 
 [ ] incorporate sqlschema
 [ ] incorporate migrations
+[ ] incorporate basic pytests
 [ ] explore and better understand decorators
 [ ] explore and better understand flask/python patterns
 
@@ -25,7 +26,7 @@ Schema:
 
 Big API goals I may or may not get to:
 [ ] CrewMembers should be able to be added
-[ ] Logs should be able to be added (Not edited or deleted, but may be 'redacted' - for starfleet records)
+[ ] Logs should be able to be added (Not edited or deleted, but may be 'redacted' by the captain - for starfleet records)
 [ ] CrewMemebers should not be able to view other CrewMembers logs, unless they are captains
 
 ## Poetry
@@ -50,5 +51,13 @@ Do commit your `poetry.lock` file!
 You will need to set some environement variables and then run the flask app in your poetry shell:
 ```py
 export FLASK_APP=hello
+export FLASK_ENV=development # this allows for extra development features, like the flask debugger!
 flask run
 ```
+
+Accessing the request data requires you to add `request` from the flask module: `from flask import request`.
+The request object contains the following data:
+- request.path = '/hello'
+- request.method = 'POST'
+- searching the url params: `searchword = request.args.get('key', '')`
+
