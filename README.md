@@ -8,7 +8,28 @@ This is a dev days project. It's goals are to:
 [ ] explore and better understand decorators
 [ ] explore and better understand flask/python patterns
 
+## Example App Goals
+
+I want to create an API, `Captains Log`. A journal not just for captains, but for your crew as well. 
+
+Schema:
+`CrewMember` 
+    - id
+    - username
+    - rank/role
+`Log`
+    - id
+    - crew_member_id
+    - stardate
+    - log_entry
+
+Big API goals I may or may not get to:
+[ ] CrewMembers should be able to be added
+[ ] Logs should be able to be added (Not edited or deleted, but may be 'redacted' - for starfleet records)
+[ ] CrewMemebers should not be able to view other CrewMembers logs, unless they are captains
+
 ## Poetry
+
 [Poetry](https://python-poetry.org/docs/) is a dependency and package management tool for Python.
 
 Helpful commands:
