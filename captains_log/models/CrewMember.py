@@ -1,3 +1,5 @@
+from marshmallow import Schema, fields
+
 from ..extensions import db
 
 class CrewMember(db.Model):
@@ -7,3 +9,12 @@ class CrewMember(db.Model):
 
     def __repr__(self):
         return '<CrewMember %r>' % self.name
+
+
+class CrewMemberSchema(Schema):
+    id = fields.Int()
+    name = fields.Str()
+    rank = fields.Str()
+
+crew_member_schema = CrewMemberSchema()
+crew_members_schema = CrewMemberSchema(many=True)

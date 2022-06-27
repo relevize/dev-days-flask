@@ -2,8 +2,14 @@
 
 This is a dev days project. It's goals are to:
 - [ ] build a basic flask project
+    - [ ] plus auth 
+    - [ ] plus jwt or cookies
+    - [ ] intercept a query param? `q=logs,asc=true`?
 - [ ] incorporate marshmallow 
+    - [ ] create a custom validator
+- [ ] add methods to a model like (get_all_logs() on the `/crew_members` endpoint, that leverages the relationship with logs)
 - [ ] incorporate sqlschema
+    - [ ] including sessions
 - [ ] incorporate migrations
 - [ ] incorporate basic pytests
 - [ ] create a seed file (optional)
