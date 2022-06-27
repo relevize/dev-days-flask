@@ -19,12 +19,14 @@ class CrewMember(db.Model):
     def __repr__(self):
         return '<CrewMember %r>' % self.name
 
-
 class CrewMemberSchema(Schema):
     id = fields.Int()
     name = fields.Str()
     rank = EnumField(RankEnum)
     formatted_rank = fields.Method('format_rank', dump_only=True)
+    # formatted_rank could also be a `fields.Function`
+    # word_count = fields.Function(lambda obj: len(obj.words))
+
 
     def format_rank(self, crew_member):
         split_rank = crew_member.rank.name.split('_')
@@ -32,7 +34,6 @@ class CrewMemberSchema(Schema):
         title_case_rank = spaced_rank.title()
 
         return title_case_rank
-
 
 crew_member_schema = CrewMemberSchema()
 crew_members_schema = CrewMemberSchema(many=True)
