@@ -83,12 +83,20 @@ The `__init__.py` file will contain the application factory and tell python that
 
 ## SQLAlchemy
 
-You can interact with SQLAlchemy through the python shell. To enter the shell, be in the poetry shell, then type `python3`
-```py
+You can interact with SQLAlchemy through the python shell. To enter the shell, be in the poetry shell, then type `python`.
 
+More to come when I'm actually writing queries...
 
-```
+## Migrate
+
+* Create a migration repository: `flask db init`
+* Generate a migration: `flask db migrate -m "Initial migration"`
+    * This will auto-magically create a migration based on your models. Results may very.
+* Migrate up: `flask db upgrade`
+* Migrate down: `flask db downgrade`
 
 ## Python Stuff
 
 * `__repr__`
+* `@` - decorators
+

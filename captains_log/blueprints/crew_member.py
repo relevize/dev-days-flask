@@ -1,5 +1,7 @@
 from flask import Blueprint
 
+from ..models import CrewMember
+
 bp = Blueprint('crew_member', __name__, url_prefix="/crew_member")
 
 @bp.route("/")

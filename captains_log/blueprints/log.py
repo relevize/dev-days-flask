@@ -1,5 +1,7 @@
 from flask import Blueprint
 
+from ..models import Log
+
 bp = Blueprint('log', __name__, url_prefix="/log")
 
 @bp.route("/")
