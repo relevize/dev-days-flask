@@ -6,6 +6,7 @@ This is a dev days project. It's goals are to:
 [ ] incorporate sqlschema
 [ ] incorporate migrations
 [ ] incorporate basic pytests
+[ ] create a seed file (optional)
 [ ] explore and better understand decorators
 [ ] explore and better understand flask/python patterns
 
@@ -16,7 +17,7 @@ I want to create an API, `Captains Log`. A journal not just for captains, but fo
 Schema:
 `CrewMember` 
     - id
-    - username
+    - name
     - rank/role
 `Log`
     - id
@@ -79,3 +80,15 @@ def index():
 ```
 
 The `__init__.py` file will contain the application factory and tell python that the `captains_log` directory should be treated as a package.
+
+## SQLAlchemy
+
+You can interact with SQLAlchemy through the python shell. To enter the shell, be in the poetry shell, then type `python3`
+```py
+
+
+```
+
+## Python Stuff
+
+* `__repr__`
