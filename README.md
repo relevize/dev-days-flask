@@ -94,6 +94,21 @@ You can interact with SQLAlchemy through the python shell. To enter the shell, b
 
 More to come when I'm actually writing queries...
 
+## Marshmallow
+
+Marshmallow will deserialize incoming data and serialize outgoing data based on a schema!
+
+You can deserialize outgoing data using `load`. 
+```py
+data = crew_member_schema.load(request.get_json()
+```
+
+You can serialize incoming data using `dump`.
+```py
+crew_member = CrewMember.query.filter_by(id=id).first()
+dumped_crew_member = crew_member_schema.dump(crew_member)
+```
+
 ## Migrate
 
 * Create a migration repository: `flask db init`
