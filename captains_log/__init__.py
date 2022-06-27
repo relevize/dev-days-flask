@@ -1,4 +1,3 @@
-from .blueprints import crew_member
 from flask import Flask
 
 from .extensions import db, migrate

@@ -61,6 +61,7 @@ The request object contains the following data:
 - request.path = '/hello'
 - request.method = 'POST'
 - searching the url params: `searchword = request.args.get('key', '')`
+- request.json()
 
 You can get and set cookies!
 ```py
@@ -94,6 +95,7 @@ More to come when I'm actually writing queries...
     * This will auto-magically create a migration based on your models. Results may very.
 * Migrate up: `flask db upgrade`
 * Migrate down: `flask db downgrade`
+* Get the migration you're currently on: `flask db current`
 
 ## Python Stuff
 
