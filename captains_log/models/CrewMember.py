@@ -24,6 +24,15 @@ class CrewMemberSchema(Schema):
     id = fields.Int()
     name = fields.Str()
     rank = EnumField(RankEnum)
+    formatted_rank = fields.Method('format_rank', dump_only=True)
+
+    def format_rank(self, crew_member):
+        split_rank = crew_member.rank.name.split('_')
+        spaced_rank = ' '.join(split_rank)
+        title_case_rank = spaced_rank.title()
+
+        return title_case_rank
+
 
 crew_member_schema = CrewMemberSchema()
 crew_members_schema = CrewMemberSchema(many=True)
