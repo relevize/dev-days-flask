@@ -44,3 +44,11 @@ Helpful commands:
     - This would be used if you just cloned the project, or if you are pulling latest
 
 Do commit your `poetry.lock` file! 
+
+## Flask
+
+You will need to set some environement variables and then run the flask app in your poetry shell:
+```py
+export FLASK_APP=hello
+flask run
+```
