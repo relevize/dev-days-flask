@@ -1,14 +1,14 @@
 # Dev Days Flask
 
 This is a dev days project. It's goals are to:
-[ ] build a basic flask project
-[ ] incorporate marshmallow 
-[ ] incorporate sqlschema
-[ ] incorporate migrations
-[ ] incorporate basic pytests
-[ ] create a seed file (optional)
-[ ] explore and better understand decorators
-[ ] explore and better understand flask/python patterns
+- [ ] build a basic flask project
+- [ ] incorporate marshmallow 
+- [ ] incorporate sqlschema
+- [ ] incorporate migrations
+- [ ] incorporate basic pytests
+- [ ] create a seed file (optional)
+- [ ] explore and better understand decorators
+- [ ] explore and better understand flask/python patterns
 
 ## Example App Goals
 
@@ -26,9 +26,9 @@ Schema:
     - log_entry
 
 Big API goals I may or may not get to:
-[ ] CrewMembers should be able to be added
-[ ] Logs should be able to be added (Not edited or deleted, but may be 'redacted' by the captain - for starfleet records)
-[ ] CrewMemebers should not be able to view other CrewMembers logs, unless they are captains
+- [ ] CrewMembers should be able to be added
+- [ ] Logs should be able to be added (Not edited or deleted, but may be 'redacted' by the captain - for starfleet records)
+- [ ] CrewMemebers should not be able to view other CrewMembers logs, unless they are captains
 
 ## Poetry
 
