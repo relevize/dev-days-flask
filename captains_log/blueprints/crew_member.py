@@ -9,9 +9,7 @@ bp = Blueprint('crew_member', __name__, url_prefix="/crew_member")
 def create_crew_member():
     data = crew_member_schema.load(request.get_json())
     name, rank = data['name'], data['rank']
-
     new_crew_member = CrewMember(name = name, rank = rank)
-
     db.session.add(new_crew_member)
     db.session.commit()
 
@@ -30,3 +28,10 @@ def get_crew_member_by_id(id):
     dumped_crew_member = crew_member_schema.dump(crew_member)
 
     return jsonify(dumped_crew_member), 200
+
+@bp.route("/<int:id>", methods=['DELETE'])
+def delete_crew_member(id):
+    CrewMember.query.filter_by(id=id).delete()
+    db.session.commit()
+    
+    return "", 204
