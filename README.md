@@ -61,3 +61,21 @@ The request object contains the following data:
 - request.method = 'POST'
 - searching the url params: `searchword = request.args.get('key', '')`
 
+You can get and set cookies!
+```py
+from flask import request, make_response
+
+# Getting Cookies
+@app.route('/')
+def index():
+    username = request.cookes.get('username')
+
+# Setting Cookies
+@app.route('/')
+def index():
+    resp = make_response()
+    resp.set_cookie('username', 'tsuki cat')
+    return resp
+```
+
+The `__init__.py` file will contain the application factory and tell python that the `captains_log` directory should be treated as a package.
