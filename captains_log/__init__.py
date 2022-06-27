@@ -7,11 +7,9 @@ def create_app():
     def hello_captain():
         return "<p>Hello, Captain!</p>"
 
-    # Routes
-    from . import user
+    # Blueprints
+    from .blueprints import user, log
     app.register_blueprint(user.bp)
-
-    from . import log
     app.register_blueprint(log.bp)
 
     return app
