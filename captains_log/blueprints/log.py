@@ -17,7 +17,7 @@ def create_log():
     return "", 200
 
 def authenticate_captain_rank(func):
-    def wrapper():
+    def wrapper(**kwargs):
         """
         Only a Captain should be able to view all logs!
         """
@@ -33,16 +33,19 @@ def authenticate_captain_rank(func):
             requester_name = dumped_crew_member['name']
             message = f'{requester_rank} {requester_name}, only a crew member with the rank of captain may view all logs'
             return jsonify({ 'message': message }), 403
+
+        kwargs["crew_member"] = dumped_crew_member
         """
         End of auth check
         """
 
-        return func()
+        return func(**kwargs)
+
     return wrapper
 
-@bp.route("/", methods=["GET"])
+@bp.route("/all", methods=["GET"])
 @authenticate_captain_rank
-def get_all_logs():
+def get_all_logs(crew_member):
     all_logs = Log.query.all()
     dumped_logs = logs_schema.dump(all_logs)
 
