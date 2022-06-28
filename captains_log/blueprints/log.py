@@ -51,7 +51,7 @@ def authenticate_captain_rank(func):
 @bp.route("/all", methods=["GET"])
 @extract_jwt_and_hydrate_crew_member
 @authenticate_captain_rank
-def get_all_logs():
+def get_all_logs(crew_member):
     all_logs = Log.query.all()
     dumped_logs = logs_schema.dump(all_logs)
 

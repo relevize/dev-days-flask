@@ -1,6 +1,7 @@
 from datetime import datetime
-from marshmallow import Schema, fields, pre_dump
+from marshmallow import Schema, fields
 
+from .CrewMember import CrewMemberSchema
 from ..extensions import db
 
 class Log(db.Model):
@@ -18,14 +19,15 @@ class Log(db.Model):
 class LogSchema(Schema):
     id = fields.Int()
     star_date = fields.DateTime()
-    log_entry = fields.Str()
+    log_entry = fields.Str(load_only=True)
     redacted = fields.Bool(load_only=True)
-    crew_member_id = fields.Int()
+    crew_member_id = fields.Int(load_only=True)
     formatted_log_entry = fields.Method('format_log_entry', dump_only=True)
+    crew_member = fields.Nested(CrewMemberSchema)
 
     def format_log_entry(self, log):
         if log.redacted:
-            return "Log entry is redacted, and only accessale by senior officers."
+            return "*REDACTED* Log entry is only accessible by senior officers."
         return log.log_entry
 
 log_schema = LogSchema()

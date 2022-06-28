@@ -22,6 +22,14 @@ More Realistic Goals:
 - [ ] Create auth decorator w/ JWTs 
 - [ ] Create a seed 
 
+## Take Aways
+
+Things I kinda struggle with still
+ * `__init__.py` lol - why!?
+ * imports are harder than they should be! I gave up on a script and just made a seed endpoint.
+ * Is there a way to keep certain values from being returned with out manually extracting those values?
+    * Ex) removing `log_entry` from being returned
+
 ## Example App Goals
 
 I want to create an API, `Captains Log`. A journal not just for captains, but for your crew as well. 
