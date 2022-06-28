@@ -10,9 +10,10 @@ def create_app():
     migrate.init_app(app, db)
 
     # Blueprints
-    from .blueprints import crew_member, log, auth
+    from .blueprints import crew_member, log, auth, seed
     app.register_blueprint(crew_member.bp)
     app.register_blueprint(log.bp)
     app.register_blueprint(auth.bp)
+    app.register_blueprint(seed.bp)
 
     return app
