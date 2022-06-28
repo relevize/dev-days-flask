@@ -36,6 +36,14 @@ def get_crew_member_logs(id):
 
     return jsonify({ 'logs': dumped_logs }), 200
 
+@bp.route("/<int:id>", methods=["PUT"])
+def redact_log(id):
+    log = Log.query.filter_by(id=id).first()
+    log.redacted = True
+    db.session.commit()
+
+    return "The log has been redacted.", 200
+
 @bp.route("/<int:id>", methods=["DELETE"])
 def delete_log_by_id(id):
     Log.query.filter_by(id=id).delete()
@@ -53,10 +61,13 @@ Routes to make:
 [x] Delete Log (this is temporary)
 
 Migration:
-[ ] Migration to include Redacted
+[x] Migration to include Redacted
 [ ] Update routes to not return content if redacted
-[ ] Redact Log (this needs to wait for a migration)
+[x] Redact Log endpoint (this needs to wait for a migration)
 
 Auth:
 [ ] Routes must check for rank somehow
+
+Relationship:
+[ ] return full crew_member object instead of just id
 """
