@@ -16,25 +16,30 @@ def create_log():
 
     return "", 200
 
-def authenticate_captain_rank(func):
-    def wrapper(**kwargs):
-        """
-        Only a Captain should be able to view all logs!
-        """
+def extract_jwt_and_hydrate_crew_member(func):
+    def extract_jwt_and_hydrate_crew_member_wrapper(**kwargs):
         auth_header = request.headers.get('Authorization')
         auth_token = auth_header.split(" ")[1]
         decoded_token = CrewMember.decode_auth_token(auth_token)
         crew_member_id = decoded_token
         crew_member = CrewMember.query.filter_by(id=crew_member_id).first()
         dumped_crew_member = crew_member_schema.dump(crew_member)
-        requester_rank = dumped_crew_member['rank']
-        
+        kwargs["crew_member"] = dumped_crew_member
+
+        return func(**kwargs)
+
+    return extract_jwt_and_hydrate_crew_member_wrapper
+
+def authenticate_captain_rank(func):
+    def wrapper(**kwargs):
+        """
+        Only a Captain should be able to view all logs!
+        """
+        requester_rank = kwargs['crew_member']['rank']
         if requester_rank != 'captain':
-            requester_name = dumped_crew_member['name']
+            requester_name = kwargs['crew_member']['name']
             message = f'{requester_rank} {requester_name}, only a crew member with the rank of captain may view all logs'
             return jsonify({ 'message': message }), 403
-
-        kwargs["crew_member"] = dumped_crew_member
         """
         End of auth check
         """
@@ -44,8 +49,9 @@ def authenticate_captain_rank(func):
     return wrapper
 
 @bp.route("/all", methods=["GET"])
+@extract_jwt_and_hydrate_crew_member
 @authenticate_captain_rank
-def get_all_logs(crew_member):
+def get_all_logs():
     all_logs = Log.query.all()
     dumped_logs = logs_schema.dump(all_logs)
 
