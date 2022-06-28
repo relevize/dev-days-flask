@@ -1,54 +1,54 @@
 # Dev Days Flask
 
-This is a dev days project. It's goals are to:
-- [x] build a basic flask project
-    - [ ] plus auth 
-    - [ ] plus jwt or cookies
-    - [ ] intercept a query param? `q=logs,asc=true`?
-- [x] incorporate marshmallow 
-    - [ ] create a custom validator
-- [ ] add methods to a model like (get_all_logs() on the `/crew_members` endpoint, that leverages the relationship with logs)
-- [x] incorporate SQLAlchemy
-    - [ ] including sessions
-- [x] incorporate migrations
-- [ ] incorporate basic pytests
-- [ ] create a seed file (optional)
-- [ ] explore and better understand decorators
-- [ ] explore and better understand flask/python patterns
+This is a dev days project! I wanted to build a small project that would get me more familiar with the technology used in the Relevize API. Technologies like:
+* Flask
+* Marshmallow
+* SQLAlchemy
+* JWT
+* Flask-Migrate
 
+## Project Plan
 
-More Realistic Goals:
-- [x] Figure out a way to veryify if request is captain or not (auth)
-- [ ] Create auth decorator w/ JWTs 
-- [ ] Create a seed 
+I want to create an API, `Captains Log`. A journal not just for captains, but for your crew as well. 
+
+| crew_member | log            |
+| :---------- | :------------- |
+| id          | id             |
+| name        | star_date      |
+| rank        | log_entry      |
+|             | redacted       |
+|             | crew_member_id |
+
+Basic user stories:
+- [x] CrewMembers should be able to be added
+- [ ] Logs should be able to be added (Not edited or deleted, but may be 'redacted' by the captain - for starfleet records)
+- [ ] CrewMemebers should not be able to view other CrewMembers logs, unless they are captains
+
+Some Tech Goals:
+- [x] Create basic flask app
+- [x] Connect flask app to SQLAlchemy
+- [x] Use flask-migrate to update the SQLAlchemy database
+- [x] Use marshmallow for seialization and validation
+- [x] Enforce JWT on some routes
+    - [x] Used only on `/logs/all` `GET` requests (that's as far as I got)
+- [x] Create auth decorators
+    - [x] One to extract requesting crew member data 
+    - [x] One to reject crew members from accessing route if they are not captain
+- [x] Be able to seed database
 
 ## Take Aways
 
 Things I kinda struggle with still
  * `__init__.py` lol - why!?
  * imports are harder than they should be! I gave up on a script and just made a seed endpoint.
- * Is there a way to keep certain values from being returned with out manually extracting those values?
-    * Ex) removing `log_entry` from being returned
+ * Can I pass data into the schema? Data that can be referenced by Marshmallow `field.methods`?
+    * Ex) removing `log_entry` from being returned 
 
-## Example App Goals
 
-I want to create an API, `Captains Log`. A journal not just for captains, but for your crew as well. 
+---
+---
 
-Schema:
-`CrewMember` 
-    - id
-    - name
-    - rank/role
-`Log`
-    - id
-    - crew_member_id
-    - stardate
-    - log_entry
-
-Big API goals I may or may not get to:
-- [ ] CrewMembers should be able to be added
-- [ ] Logs should be able to be added (Not edited or deleted, but may be 'redacted' by the captain - for starfleet records)
-- [ ] CrewMemebers should not be able to view other CrewMembers logs, unless they are captains
+# Notes From Documentation I Read
 
 ## Poetry
 

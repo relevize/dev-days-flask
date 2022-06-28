@@ -6,8 +6,6 @@ bp = Blueprint('auth', __name__, url_prefix="/auth")
 
 @bp.route('/<int:id>', methods=["GET"])
 def get_user_token(id):
-
-    # verify user exists - could this become a decorator?
     crew_member_id = CrewMember.query.filter_by(id=id).first()
     if not crew_member_id:
         return "That crew member does not exist.", 400
@@ -20,3 +18,4 @@ def get_user_token(id):
     }
 
     return jsonify(data), 200
+    

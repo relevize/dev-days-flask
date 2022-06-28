@@ -13,7 +13,6 @@ class RankEnum(enum.Enum):
     commander = 3
     captain = 4
 
-# secret_key = "\x1e[\xb1\x01:\x9a\xb3\x05v6\x8c`\xb3\x9a\xeb5/dm\xde[\x18\xc3\x99"
 secret_key = "a_bad_secret_key"
 
 class CrewMember(db.Model):
@@ -54,9 +53,6 @@ class CrewMemberSchema(Schema):
     name = fields.Str()
     rank = EnumField(RankEnum)
     formatted_rank = fields.Method('format_rank', dump_only=True)
-    # formatted_rank could also be a `fields.Function`
-    # word_count = fields.Function(lambda obj: len(obj.words))
-
 
     def format_rank(self, crew_member):
         split_rank = crew_member.rank.name.split('_')
