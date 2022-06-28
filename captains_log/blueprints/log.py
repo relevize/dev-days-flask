@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 
 from ..models.Log import Log, log_schema, logs_schema
+from ..models.CrewMember import CrewMember, crew_member_schema
 from ..extensions import db
 
 bp = Blueprint('log', __name__, url_prefix="/log")
@@ -17,6 +18,25 @@ def create_log():
 
 @bp.route("/", methods=["GET"])
 def get_all_logs():
+
+    """
+    Only a Captain should be able to view all logs!
+    """
+    auth_header = request.headers.get('Authorization')
+    auth_token = auth_header.split(" ")[1]
+    decoded_token = CrewMember.decode_auth_token(auth_token)
+    crew_member_id = decoded_token
+    crew_member = CrewMember.query.filter_by(id=crew_member_id).first()
+    dumped_crew_member = crew_member_schema.dump(crew_member)
+    if dumped_crew_member['rank'] is not 'captain':
+        requester_name = dumped_crew_member['name']
+        requester_rank = dumped_crew_member['rank']
+        message = f'{requester_rank} {requester_name}, only a crew member with the rank of captain may view all logs'
+        return jsonify({ 'message': message }), 403
+    """
+    End of auth check
+    """
+
     all_logs = Log.query.all()
     dumped_logs = logs_schema.dump(all_logs)
 

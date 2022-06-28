@@ -9,13 +9,10 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
 
-    @app.route("/hello_captain")
-    def hello_captain():
-        return "<p>Hello, Captain!</p>"
-
     # Blueprints
-    from .blueprints import crew_member, log
+    from .blueprints import crew_member, log, auth
     app.register_blueprint(crew_member.bp)
     app.register_blueprint(log.bp)
+    app.register_blueprint(auth.bp)
 
     return app

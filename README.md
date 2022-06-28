@@ -16,6 +16,12 @@ This is a dev days project. It's goals are to:
 - [ ] explore and better understand decorators
 - [ ] explore and better understand flask/python patterns
 
+
+More Realistic Goals:
+- [x] Figure out a way to veryify if request is captain or not (auth)
+- [ ] Create auth decorator w/ JWTs 
+- [ ] Create a seed 
+
 ## Example App Goals
 
 I want to create an API, `Captains Log`. A journal not just for captains, but for your crew as well. 
@@ -123,3 +129,7 @@ dumped_crew_member = crew_member_schema.dump(crew_member)
 * `__repr__`
 * `@` - decorators
 * enums
+
+## Json Web Token
+
+I'm kind of winging this - I'm basing it off [this article](https://realpython.com/token-based-authentication-with-flask/).
