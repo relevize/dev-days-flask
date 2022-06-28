@@ -13,6 +13,9 @@ def create_crew_member():
     db.session.add(new_crew_member)
     db.session.commit()
 
+    """
+    rank shows as 'RankEnum.captain' - need to fix
+    """
     return f"Welcome aboard {rank} {name}", 200
 
 @bp.route("/", methods=["GET"])
