@@ -44,6 +44,22 @@ Things I kinda struggle with still
  * Can I pass data into the schema? Data that can be referenced by Marshmallow `field.methods`?
     * Ex) removing `log_entry` from being returned 
 
+## Running the project locally
+
+I haven't tested this out, but it should get you in the right direction.
+* clone the repository
+* `cd` into the repository and enter the poetry shell with `poetry shell` (stay in the shell for the rest of the commands)
+* install the projects dependencies with `poetry install`
+* use the command `flask db upgrade` to get a db created and to upgrade it to the latest migration
+    * I *think* this will create the db for you
+* if you want some seed data, you can hit the `/seed` endpoint - *THIS WILL DELETE ALL EXISTING DATA* then add the seed data
+* set some flask env variables with the following
+    * `export FLASK_APP=captains_log`
+    * `export FLASK_ENV=development` (this should be optional)
+    * `flask run`
+
+After following those steps you should be able to hit all of the `/crew_member` endpoints with no problem. Some of the `/log` endpoints will require an auth token. You can aquire a token by calling the `/auth/:id` endpoint with a crew_member id. When you are done fiddling around you can exit the poetry shell by using the `exit` command.
+
 
 ---
 ---
