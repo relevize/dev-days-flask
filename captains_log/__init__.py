@@ -1,10 +1,11 @@
 from flask import Flask
+import os
 
 from .extensions import db, migrate
 
 def create_app():
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 
     db.init_app(app)
     migrate.init_app(app, db)

@@ -6,6 +6,10 @@ from ..extensions import db
 
 bp = Blueprint('log', __name__, url_prefix="/log")
 
+@bp.route("/hi", methods=["GET"])
+def say_hi():
+    return "hi there!!", 200
+
 @bp.route("/", methods=["POST"])
 def create_log():
     data = log_schema.load(request.get_json())
