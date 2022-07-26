@@ -161,4 +161,59 @@ I'm kind of winging this - I'm basing it off [this article](https://realpython.c
 
 ## Docker
 
+A way to isolate a program into a container. That container can then be placed anywhere, and operate the same way. It removed varialbiles like local programs, operating system, your computers IP network, and many other things that result in the phrase `well it worked on my machine!`.
+
+### Fun docker comands 
+
+* `docker run -it ubuntu /bin/bash` - run a container based on ubuntu (it will download the official ubuntu image from the docker store). The `i` & `t` flags create an interactive session (in the terminal).
+* `docker images` - shows a list of containers I have locally
+* `docker ps` - shows a list of running containers 
+* `docker ps -a` - shows a list of all perviously running containers
+* `docker inspect container_name` - shows details about a container
+* `docker start container_name` - starts a container
+* `docker attach container_name` - opens a terminal in that container
+* `docker run -d container_name` - runs the container in the backgound, without entering the shell.
+* `docker network ls` - list dockers existing networks
+* `docker run -d --network=host ubuntu_networking container_name` - add the container to the host network (your computers). There is then no isolation between container and computer. 
+
+### Port Mapping: 
+When we run an app in a container, the port that runs the app is *IN* the containers IP. To access it from outside of the container (like in the browser), we need to map the port. 
+
+This can be done with the `publish` flag.
+
+`docker run -d -p 3000:8080 container_name` - this command will map port 3000 on the docker container to port 8080 on your computers port.
+
+### Networking:
+By default, the ports used will be a part of the bridge network. You can use the host network (your computers network) by using the `host` command: `docker run -d --network=host ubuntu_networking container_name`
+
+### Volumes:
+This helps us persist data. With out volumes we couldn't have persistant storage. For instance, then we would not be able to run `make stop` in the relevize docker container, then `make start` and the database still retain it's content. 
+
+### Tagging
+Helpful for identifying speficic versions of an image. You can have multiple tags. 
+
+## Running this docker container locally
+
+*This only kinda works* - we need to still fire a bash script to run migrations. The code API is still available.
+
+
 Poetry is not straight forward to run in a container, at lease in my limited knowledge of it and Docker. So this dockerization will use the command `poetry export -f requirements.txt --output requirements.txt --without-hashes` to extract a `requirements.txt` file from our poetry `toml` file. That `requirements.txt` will be used by Docker to import our packages.
+
+From the root of the project you can spin up the containers in several ways.
+
+* Option 1
+    * `docker-compose up` - this command will spin up both the db and API
+* Option 2
+    * `docker-compose up -d db-demo` - this will spin up the db
+    * `docker-compose up --build pythonapp` - this will spinup the API
+
+To stop the containers you can run `docker-compose down`.
+
+## Educational resources used for this 
+
+I started this adventure by going through the [CloudAcademy course "Docker in Depth"](https://cloudacademy.com/learning-paths/cloud-academy-docker-in-depth-129/). I found this to be only slightly applicable, a lot of the examples were using go lang and running in centOS, also it was just really heavy in networking stuff and I just wanted a grounded python example.
+
+I was able to find a very barebones example of running a Flask/Postgres app within Docker from [this article](https://blog.tinystacks.com/flask-crud-api-with-postgres). 
+
+### Unresloved questions and bugs:
+1. Why was it so difficult to access and run a bash script from the `docker-compose.yml`?
