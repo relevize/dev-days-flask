@@ -157,3 +157,8 @@ dumped_crew_member = crew_member_schema.dump(crew_member)
 ## Json Web Token
 
 I'm kind of winging this - I'm basing it off [this article](https://realpython.com/token-based-authentication-with-flask/).
+
+
+## Docker
+
+Poetry is not straight forward to run in a container, at lease in my limited knowledge of it and Docker. So this dockerization will use the command `poetry export -f requirements.txt --output requirements.txt --without-hashes` to extract a `requirements.txt` file from our poetry `toml` file. That `requirements.txt` will be used by Docker to import our packages.
